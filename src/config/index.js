@@ -1,5 +1,5 @@
 
-const baseUrl = 'http://localhost:7000/api'
+const baseUrl = 'http://localhost:8080/api'
 
 export const config = {
     getUser: `${baseUrl}/registeredUsers`,
