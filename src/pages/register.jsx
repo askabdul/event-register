@@ -27,11 +27,12 @@ export const Register = () => {
     if (!fullName) {
       setCheckEmptiness(true);
     }
-    if (!gender) {
+    if (gender !== 'male' || gender !== 'female') {
       setCheckEmptiness(true);
     }
-    if (!phone) {
+    if (phone === '') {
       setCheckEmptiness(true);
+      // alert('phone is required')
     }
     if (!email) {
       setCheckEmptiness(true);
@@ -49,12 +50,12 @@ export const Register = () => {
       setCheckEmptiness(true);
     } else {
       axios
-        .post(config.register, {
+        .post(config.remoteBaseUrl + '/register', {
           fullName,
           gender,
           phone,
           email,
-          howDidYouHear: [{ zoom, revOfJesus, familyAndFriends, other }],
+          howDidYouHear: [{ zoom}, { revOfJesus }, {familyAndFriends}, {other }],
           otherSpecify: !otherSpecify ? "null" : otherSpecify,
           firstTime,
           arrival,
@@ -88,7 +89,7 @@ export const Register = () => {
           <div className="row justify-content-center">
             <div className="col-sm-10 col-md-9 col-lg-6">
               <div className="u-shadow-v24 g-bg-white rounded g-py-40 g-px-30">
-                <header className="text-center mb-4">
+                <header className="text-center mb-3">
                   <h2 className="h2 g-color-black g-font-weight-600">
                     Register for the Event
                   </h2>
@@ -212,6 +213,31 @@ export const Register = () => {
                     )}
                   </div>
                   <div className="mb-4">
+                    {checkEmptiness && (
+                      <div
+                      className="alert alert-dismissible fade show g-bg-red g-color-white rounded-0"
+                      role="alert"
+                    >
+                      <button
+                        type="button"
+                        className="close u-alert-close--light"
+                        data-dismiss="alert"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">×</span>
+                      </button>
+
+                      <div className="media">
+                        <span className="d-flex g-mr-10 g-mt-5">
+                          <i className="icon-ban g-font-size-25"></i>
+                        </span>
+                        <span className="media-body align-self-center">
+                          <strong>Oh snap!</strong> Phone Number is required
+                          please.
+                        </span>
+                      </div>
+                    </div>
+                    )}
                     <label className="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
                       Phone Number(Available on Whatsapp):
                     </label>
@@ -252,7 +278,7 @@ export const Register = () => {
                     )}
                   </div>
                   <label className="h6 g-font-weight-700 g-mb-20">
-                    How did you hear of A Day With Him
+                    How did you hear of A Day With Him <sup style={{ color: "red" }}>*</sup>
                   </label>
                   <div className="g-mb-20">
                     <label className="form-check-inline u-check g-pl-25">
@@ -327,7 +353,7 @@ export const Register = () => {
                     <div className="col-md-6">
                       <div className="g-mb-15">
                         <label className="h6 g-font-weight-700 g-mb-20">
-                          This is my first time:
+                          This is my first time <sup style={{ color: "red" }}>*</sup>
                         </label>{" "}
                         <br />
                         <label className="form-check-inline u-check g-pl-25 ml-0 g-mr-25">
@@ -362,9 +388,9 @@ export const Register = () => {
                     </div>
 
                     <div className="col-md-6">
-                      <div className="g-mb-15">
+                      <div className="g-mb-3">
                         <label className="h6 g-font-weight-700 g-mb-20">
-                          When will you arrive:
+                          When will you arrive<sup style={{ color: "red" }}>*</sup>
                         </label>{" "}
                         <br />
                         <label className="form-check-inline u-check g-pl-25 ml-0 g-mr-25">
@@ -401,7 +427,7 @@ export const Register = () => {
 
                   <div className="mb-4">
                     <label className="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
-                      Prayer Time you prefer:
+                      Prayer Time you prefer<sup style={{ color: "red" }}>*</sup>
                     </label>
                     <input
                       className="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
