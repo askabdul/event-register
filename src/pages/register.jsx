@@ -68,10 +68,21 @@ export const Register = () => {
           prayerTime,
         })
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           if(data) {
             setSuccess(true);
-            alert("its a success hurray")
+            setFullName("");
+          setGender(false);
+          setPhone("");
+          setEmail("");
+          setFirstTime(false);
+          setArrival(false);
+          setZoom(false);
+          setRevOfJesus(false);
+          setFamilyAndFriends(false);
+          setOther(false);
+          setOtherSpecify(false);
+          setPrayerTime("");
           }
         })
         .catch((error) => setErrorText(error?.response?.data?.message));
