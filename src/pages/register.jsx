@@ -16,46 +16,52 @@ export const Register = () => {
   const [arrival, setArrival] = useState(false);
   const [prayerTime, setPrayerTime] = useState("");
 
-  const [checkEmptiness, setCheckEmptiness] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
+
+  const [errorText, setErrorText] = useState('There appear to be an error');
 
   const [success, setSuccess] = useState(false);
 
-  useEffect(() => {
-  });
+  useEffect(() => {});
 
-  const register = () => {
+  const register = async () => {
     if (!fullName) {
-      setCheckEmptiness(true);
+      setErrorMessage(true);
     }
-    if (gender !== 'male' || gender !== 'female') {
-      setCheckEmptiness(true);
+    if (gender === false) {
+      setErrorMessage(true);
     }
-    if (phone === '') {
-      setCheckEmptiness(true);
+    if (phone === "") {
+      setErrorMessage(true);
       // alert('phone is required')
     }
     if (!email) {
-      setCheckEmptiness(true);
+      setErrorMessage(true);
     }
 
     if (!firstTime) {
-      setCheckEmptiness(true);
+      setErrorMessage(true);
     }
 
     if (!arrival) {
-      setCheckEmptiness(true);
+      setErrorMessage(true);
     }
 
     if (!prayerTime) {
-      setCheckEmptiness(true);
+      setErrorMessage(true);
     } else {
       axios
-        .post(config.remoteBaseUrl + '/register', {
+        .post(config.register, {
           fullName,
           gender,
           phone,
           email,
-          howDidYouHear: [{ zoom}, { revOfJesus }, {familyAndFriends}, {other }],
+          howDidYouHear: [
+            { Zoom: zoom ? 'Zoom' : '' },
+            { Rvelation: revOfJesus ? 'Revelation of Jesus': '' },
+            { Family_and_Friends: familyAndFriends ? 'Family and Friends' : ''},
+            { other: other ? otherSpecify : ''},
+          ],
           otherSpecify: !otherSpecify ? "null" : otherSpecify,
           firstTime,
           arrival,
@@ -63,21 +69,12 @@ export const Register = () => {
         })
         .then((data) => {
           console.log(data);
-          setFullName("");
-          setGender(false);
-          setPhone("");
-          setEmail("");
-          setFirstTime(false);
-          setArrival(false);
-          setZoom(false);
-          setRevOfJesus(false);
-          setFamilyAndFriends(false);
-          setOther(false);
-          setOtherSpecify(false);
-          setPrayerTime("");
-          setSuccess(true);
+          if(data) {
+            setSuccess(true);
+            alert("its a success hurray")
+          }
         })
-        .catch((error) => console.log(`there was an error ${error}`));
+        .catch((error) => setErrorText(error?.response?.data?.message));
     }
   };
 
@@ -96,7 +93,7 @@ export const Register = () => {
                 </header>
                 {/* Form */}
                 <form className="g-py-15">
-                  {checkEmptiness && (
+                  {errorMessage && (
                     <div
                       className="alert alert-dismissible fade show g-bg-red g-color-white rounded-0"
                       role="alert"
@@ -115,8 +112,7 @@ export const Register = () => {
                           <i className="icon-ban g-font-size-25"></i>
                         </span>
                         <span className="media-body align-self-center">
-                          <strong>Oh snap!</strong> All the fields are required
-                          please.
+                          <strong>Oh snap!</strong>&nbsp;{errorText}
                         </span>
                       </div>
                     </div>
@@ -213,31 +209,31 @@ export const Register = () => {
                     )}
                   </div>
                   <div className="mb-4">
-                    {checkEmptiness && (
+                    {/* {checkEmptiness && (
                       <div
-                      className="alert alert-dismissible fade show g-bg-red g-color-white rounded-0"
-                      role="alert"
-                    >
-                      <button
-                        type="button"
-                        className="close u-alert-close--light"
-                        data-dismiss="alert"
-                        aria-label="Close"
+                        className="alert alert-dismissible fade show g-bg-red g-color-white rounded-0"
+                        role="alert"
                       >
-                        <span aria-hidden="true">×</span>
-                      </button>
+                        <button
+                          type="button"
+                          className="close u-alert-close--light"
+                          data-dismiss="alert"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">×</span>
+                        </button>
 
-                      <div className="media">
-                        <span className="d-flex g-mr-10 g-mt-5">
-                          <i className="icon-ban g-font-size-25"></i>
-                        </span>
-                        <span className="media-body align-self-center">
-                          <strong>Oh snap!</strong> Phone Number is required
-                          please.
-                        </span>
+                        <div className="media">
+                          <span className="d-flex g-mr-10 g-mt-5">
+                            <i className="icon-ban g-font-size-25"></i>
+                          </span>
+                          <span className="media-body align-self-center">
+                            <strong>Oh snap!</strong> Phone Number is required
+                            please.
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                    )}
+                    )} */}
                     <label className="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
                       Phone Number(Available on Whatsapp):
                     </label>
@@ -278,7 +274,8 @@ export const Register = () => {
                     )}
                   </div>
                   <label className="h6 g-font-weight-700 g-mb-20">
-                    How did you hear of A Day With Him <sup style={{ color: "red" }}>*</sup>
+                    How did you hear of A Day With Him{" "}
+                    <sup style={{ color: "red" }}>*</sup>
                   </label>
                   <div className="g-mb-20">
                     <label className="form-check-inline u-check g-pl-25">
@@ -353,7 +350,8 @@ export const Register = () => {
                     <div className="col-md-6">
                       <div className="g-mb-15">
                         <label className="h6 g-font-weight-700 g-mb-20">
-                          This is my first time <sup style={{ color: "red" }}>*</sup>
+                          This is my first time{" "}
+                          <sup style={{ color: "red" }}>*</sup>
                         </label>{" "}
                         <br />
                         <label className="form-check-inline u-check g-pl-25 ml-0 g-mr-25">
@@ -390,7 +388,8 @@ export const Register = () => {
                     <div className="col-md-6">
                       <div className="g-mb-3">
                         <label className="h6 g-font-weight-700 g-mb-20">
-                          When will you arrive<sup style={{ color: "red" }}>*</sup>
+                          When will you arrive
+                          <sup style={{ color: "red" }}>*</sup>
                         </label>{" "}
                         <br />
                         <label className="form-check-inline u-check g-pl-25 ml-0 g-mr-25">
@@ -427,7 +426,8 @@ export const Register = () => {
 
                   <div className="mb-4">
                     <label className="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
-                      Prayer Time you prefer<sup style={{ color: "red" }}>*</sup>
+                      Prayer Time you prefer
+                      <sup style={{ color: "red" }}>*</sup>
                     </label>
                     <input
                       className="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
@@ -438,17 +438,9 @@ export const Register = () => {
                     />
                   </div>
                   <div className="row justify-content-between mb-5">
-                    {/* <div className="col-8 align-self-center">
-                  <label className="form-check-inline u-check g-color-gray-dark-v5 g-font-size-13 g-pl-25">
-                    <input className="g-hidden-xs-up g-pos-abs g-top-0 g-left-0" type="checkbox" />
-                    <div className="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
-                      <i className="fa" data-check-icon="" />
-                    </div>
-                    I accept the <a href="#">Terms and Conditions</a>
-                  </label>
-                </div> */}
                     <div className="col-12 align-self-center text-right">
                       <button
+                      id="showToast"
                         type="button"
                         className="btn btn-primary btn-lg btn-block g-mr-10 g-mb-15"
                         onClick={register}
@@ -458,11 +450,6 @@ export const Register = () => {
                     </div>
                   </div>
                 </form>
-                {/* End Form */}
-                {/* <footer className="text-center">
-              <p className="g-color-gray-dark-v5 g-font-size-13 mb-0">Already have an account? <a className="g-font-weight-600" href="page-login-6.html">signin</a>
-              </p>
-            </footer> */}
               </div>
             </div>
           </div>

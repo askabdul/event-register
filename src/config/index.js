@@ -1,9 +1,9 @@
 
 const baseUrl = 'http://localhost:8080/api'
-const remoteBaseUrl = 'https://regista-api.herokuapp.com'
+const remoteBaseUrl = 'http://localhost:8080/https://regista-api.herokuapp.com/api'
 
 export const config = {
-    getUser: `${baseUrl}/registeredUsers`,
-    register: `${baseUrl}/register`,
-    remoteBaseUrl,
+    getUser: `${remoteBaseUrl}/registeredUsers`,
+    register: `${remoteBaseUrl}/register`,
+    baseUrl,
 }
