@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Message } from 'element-react'
 import axios from "axios";
 import { config } from "../config";
 
@@ -18,11 +19,35 @@ export const Register = () => {
 
   const [errorMessage, setErrorMessage] = useState(false);
 
-  const [errorText, setErrorText] = useState('There appear to be an error');
+  const [errorText, setErrorText] = useState("There appear to be an error");
 
   const [success, setSuccess] = useState(false);
 
-  useEffect(() => {});
+  const [checkNumberOfTimes, setCheckNumberOfTimes] = useState([]);
+
+  const [checkForLength, setCheckForLength] = useState(null);
+
+  useEffect(() => {
+    axios.get(config.getUser).then((data) => {
+      console.log(data.data);
+      setCheckNumberOfTimes(data.data);
+    });
+    check(prayerTime, arrival)
+  }, []);
+
+  const open4 = () =>{
+    Message.error('Oops, this is a error message.');
+  }
+
+  const check = (option, day) => {
+    if (checkNumberOfTimes.length !== 0) {
+      setCheckForLength( checkNumberOfTimes.filter(a => {
+        return a.arrival === day
+      }).filter(b => {
+        return b.prayerTime === option
+      }).length)
+    }
+  };
 
   const register = async () => {
     if (!fullName) {
@@ -49,6 +74,10 @@ export const Register = () => {
 
     if (!prayerTime) {
       setErrorMessage(true);
+    }
+    if (checkForLength === 5) {
+      // alert("choose another time please");
+      open4()
     } else {
       axios
         .post(config.register, {
@@ -57,10 +86,12 @@ export const Register = () => {
           phone,
           email,
           howDidYouHear: [
-            { Zoom: zoom ? 'Zoom' : '' },
-            { Rvelation: revOfJesus ? 'Revelation of Jesus': '' },
-            { Family_and_Friends: familyAndFriends ? 'Family and Friends' : ''},
-            { other: other ? otherSpecify : ''},
+            { Zoom: zoom ? "Zoom" : "" },
+            { Rvelation: revOfJesus ? "Revelation of Jesus" : "" },
+            {
+              Family_and_Friends: familyAndFriends ? "Family and Friends" : "",
+            },
+            { other: other ? otherSpecify : "" },
           ],
           otherSpecify: !otherSpecify ? "null" : otherSpecify,
           firstTime,
@@ -68,26 +99,131 @@ export const Register = () => {
           prayerTime,
         })
         .then((data) => {
-          // console.log(data);
-          if(data) {
-            setSuccess(true);
-            setFullName("");
-          setGender(false);
-          setPhone("");
-          setEmail("");
-          setFirstTime(false);
-          setArrival(false);
-          setZoom(false);
-          setRevOfJesus(false);
-          setFamilyAndFriends(false);
-          setOther(false);
-          setOtherSpecify(false);
-          setPrayerTime("");
-          }
+          console.log("------", data);
+          console.log("sklahdfkahsdfkahsdfkjh");
+          // if (data) {
+          //   setSuccess(true);
+          //   setFullName("");
+          //   setGender(false);
+          //   setPhone("");
+          //   setEmail("");
+          //   setFirstTime(false);
+          //   setArrival(false);
+          //   setZoom(false);
+          //   setRevOfJesus(false);
+          //   setFamilyAndFriends(false);
+          //   setOther(false);
+          //   setOtherSpecify(false);
+          //   setPrayerTime("");
+          //   console.log('sent success');
+          // }
         })
         .catch((error) => setErrorText(error?.response?.data?.message));
     }
   };
+
+  const getSelectValues = (e) => {
+    check(e.target.value, arrival);
+    setPrayerTime(e.target.value);
+  };
+
+  const fridayPrayers = [
+    {
+      label: "--Please choose a time for prayer--",
+      value: "No prayer for me",
+    },
+    {
+      value: "6:00 - 7:00am",
+      label: "6:00 - 7:00am",
+    },
+    {
+      value: "7:00 - 8:00am",
+      label: "7:00 - 8:00am",
+    },
+    {
+      value: "8:00 - 9:00am",
+      label: "8:00 - 9:00am",
+    },
+    {
+      value: "9:00 - 10:00am",
+      label: "9:00 - 10:00am",
+    },
+    {
+      value: "10:00 - 11:00am",
+      label: "10:00 - 11:00am",
+    },
+    {
+      value: "11:00 - 12:00pm",
+      label: "11:00 - 12:00pm",
+    },
+    {
+      value: "12:00 - 1:00pm",
+      label: "12:00 - 1:00pm",
+    },
+    {
+      value: "1:00 - 2:00pm",
+      label: "1:00 - 2:00pm",
+    },
+    {
+      value: "2:00 - 3:00pm",
+      label: "2:00 - 3:00pm",
+    },
+    {
+      value: "3:00 - 4:00pm",
+      label: "3:00 - 4:00pm",
+    },
+    {
+      value: "4:00 - 5:00pm",
+      label: "4:00 - 5:00pm",
+    },
+    {
+      value: "5:00 - 6:00pm",
+      label: "5:00 - 6:00pm",
+    },
+    {
+      value: "6:00 - 7:00pm",
+      label: "6:00 - 7:00pm",
+    },
+    {
+      value: "7:00 - 8:00pm",
+      label: "7:00 - 8:00pm",
+    },
+    {
+      value: "8:00 - 9:00pm",
+      label: "8:00 - 9:00pm",
+    },
+    {
+      value: "9:00 - 10:00pm",
+      label: "9:00 - 10:00pm",
+    },
+    {
+      value: "10:00 - 11:00pm",
+      label: "10:00 - 11:00pm",
+    },
+    {
+      value: "11:00 - 12:00am",
+      label: "11:00 - 12:00am",
+    },
+  ];
+
+  const saturdayPrayers = [
+    {
+      label: "--Please choose a time for prayer--",
+      value: "No prayer for me",
+    },
+    {
+      value: "12:00 - 1:00pm",
+      label: "12:00 - 1:00am",
+    },
+    {
+      value: "1:00 - 2:00pm",
+      label: "1:00 - 2:00pm",
+    },
+    {
+      value: "2:00 - 3:00pm",
+      label: "2:00 - 3:00pm",
+    },
+  ];
 
   return (
     <main>
@@ -96,14 +232,14 @@ export const Register = () => {
         <div className="container g-py-50">
           <div className="row justify-content-center">
             <div className="col-sm-10 col-md-9 col-lg-6">
-              <div className="u-shadow-v24 g-bg-white rounded g-py-40 g-px-30">
+              <div className="u-shadow-v24 g-bg-white rounded g-py-14 g-px-30">
                 <header className="text-center mb-3">
                   <h2 className="h2 g-color-black g-font-weight-600">
                     Register for the Event
                   </h2>
                 </header>
                 {/* Form */}
-                <form className="g-py-15">
+                <form className="g-py-1">
                   {errorMessage && (
                     <div
                       className="alert alert-dismissible fade show g-bg-red g-color-white rounded-0"
@@ -161,7 +297,7 @@ export const Register = () => {
                     </label>
                     <input
                       className="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
-                      type="email"
+                      type="text"
                       placeholder="Adwoa Larsey"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
@@ -220,31 +356,6 @@ export const Register = () => {
                     )}
                   </div>
                   <div className="mb-4">
-                    {/* {checkEmptiness && (
-                      <div
-                        className="alert alert-dismissible fade show g-bg-red g-color-white rounded-0"
-                        role="alert"
-                      >
-                        <button
-                          type="button"
-                          className="close u-alert-close--light"
-                          data-dismiss="alert"
-                          aria-label="Close"
-                        >
-                          <span aria-hidden="true">×</span>
-                        </button>
-
-                        <div className="media">
-                          <span className="d-flex g-mr-10 g-mt-5">
-                            <i className="icon-ban g-font-size-25"></i>
-                          </span>
-                          <span className="media-body align-self-center">
-                            <strong>Oh snap!</strong> Phone Number is required
-                            please.
-                          </span>
-                        </div>
-                      </div>
-                    )} */}
                     <label className="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
                       Phone Number(Available on Whatsapp):
                     </label>
@@ -435,7 +546,7 @@ export const Register = () => {
                     </div>
                   </div>
 
-                  <div className="mb-4">
+                  {/* <div className="mb-4">
                     <label className="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
                       Prayer Time you prefer
                       <sup style={{ color: "red" }}>*</sup>
@@ -447,11 +558,61 @@ export const Register = () => {
                       value={prayerTime}
                       onChange={(e) => setPrayerTime(e.target.value)}
                     />
+                  </div> */}
+
+                  <div className="mb-4">
+                    <label className="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
+                      Prayer Time you prefer
+                      <sup style={{ color: "red" }}>*</sup>
+                    </label>
+                    {arrival === "friday" && (
+                      <select
+                        value={prayerTime}
+                        onChange={getSelectValues}
+                        className="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
+                      >
+                        {fridayPrayers.map((el) => {
+                          return (
+                            <option
+                              className="g-brd-secondary-light-v2 g-color-black g-color-white--active g-bg-primary--active"
+                              key={el.value}
+                              value={el.value}
+                            >
+                              {el.label}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    )}
+
+                    {arrival === "saturday" && (
+                      <select
+                        value={prayerTime}
+                        onChange={getSelectValues}
+                        className="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
+                      >
+                        {saturdayPrayers.map((el) => {
+                          return (
+                            <option
+                              className="g-brd-secondary-light-v2 g-color-black g-color-white--active g-bg-primary--active"
+                              key={el.value}
+                              value={el.value}
+                            >
+                              {el.label}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    )}
+
+                    {!arrival && (
+                      <div>Please choose the day of arrival to select time</div>
+                    )}
                   </div>
-                  <div className="row justify-content-between mb-5">
+                  <div className="row justify-content-between">
                     <div className="col-12 align-self-center text-right">
                       <button
-                      id="showToast"
+                        id="showToast"
                         type="button"
                         className="btn btn-primary btn-lg btn-block g-mr-10 g-mb-15"
                         onClick={register}

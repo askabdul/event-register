@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/unify-core.css">
   <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/unify-components.css">
   <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/unify-globals.css">
+  <link  rel="stylesheet" href="%PUBLIC_URL%/assets/vendor/slick-carousel/slick/slick.css">
 
   <!-- CSS Customization -->
   <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/custom.css">
@@ -39,6 +40,20 @@
 
   <!-- JS Unify -->
   <script src="%PUBLIC_URL%/assets/js/hs.core.js"></script>
+
+   <!-- JS Implementing Plugins -->
+   <script src="%PUBLIC_URL%/assets/vendor/chosen/chosen.jquery.js"></script>
+
+   <!-- JS Unify -->
+   <script src="%PUBLIC_URL%/assets/js/components/hs.select.js"></script>
+
+   <!-- JS Plugins Init. -->
+   <script >
+     $(document).ready(function () {
+       // initialization of custom select
+       $.HSCore.components.HSSelect.init('.js-custom-select');
+     });
+   </script>
 
   <!-- JS Customization -->
   <script src="%PUBLIC_URL%/assets/js/custom.js"></script>
