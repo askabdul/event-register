@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Message } from 'element-react'
+import { Message } from "element-react";
 import axios from "axios";
 import { config } from "../config";
 
@@ -32,20 +32,24 @@ export const Register = () => {
       console.log(data.data);
       setCheckNumberOfTimes(data.data);
     });
-    check(prayerTime, arrival)
+    check(prayerTime, arrival);
   }, []);
 
-  const open4 = () =>{
-    Message.error('Oops, this is a error message.');
-  }
+  const open4 = () => {
+    Message.error("Oops, this is a error message.");
+  };
 
   const check = (option, day) => {
     if (checkNumberOfTimes.length !== 0) {
-      setCheckForLength( checkNumberOfTimes.filter(a => {
-        return a.arrival === day
-      }).filter(b => {
-        return b.prayerTime === option
-      }).length)
+      setCheckForLength(
+        checkNumberOfTimes
+          .filter((a) => {
+            return a.arrival === day;
+          })
+          .filter((b) => {
+            return b.prayerTime === option;
+          }).length
+      );
     }
   };
 
@@ -77,7 +81,7 @@ export const Register = () => {
     }
     if (checkForLength === 5) {
       // alert("choose another time please");
-      open4()
+      open4();
     } else {
       axios
         .post(config.register, {
@@ -100,23 +104,6 @@ export const Register = () => {
         })
         .then((data) => {
           console.log("------", data);
-          console.log("sklahdfkahsdfkahsdfkjh");
-          // if (data) {
-          //   setSuccess(true);
-          //   setFullName("");
-          //   setGender(false);
-          //   setPhone("");
-          //   setEmail("");
-          //   setFirstTime(false);
-          //   setArrival(false);
-          //   setZoom(false);
-          //   setRevOfJesus(false);
-          //   setFamilyAndFriends(false);
-          //   setOther(false);
-          //   setOtherSpecify(false);
-          //   setPrayerTime("");
-          //   console.log('sent success');
-          // }
         })
         .catch((error) => setErrorText(error?.response?.data?.message));
     }
