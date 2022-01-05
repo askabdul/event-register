@@ -36,7 +36,7 @@ export const Register = () => {
   }, []);
 
   const open4 = () => {
-    Message.error("Oops, this is a error message.");
+    Message.error(`Oops ${prayerTime} is fully booked choose different`);
   };
 
   const check = (option, day) => {
