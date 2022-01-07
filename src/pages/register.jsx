@@ -16,24 +16,16 @@ export const Register = () => {
   const [firstTime, setFirstTime] = useState(false);
   const [arrival, setArrival] = useState(false);
   const [prayerTime, setPrayerTime] = useState("");
-
-  const [errorMessage, setErrorMessage] = useState(false);
-
-  const [errorText, setErrorText] = useState("There appear to be an error");
-
-  const [success, setSuccess] = useState(false);
-
   const [checkNumberOfTimes, setCheckNumberOfTimes] = useState([]);
-
   const [checkForLength, setCheckForLength] = useState(null);
 
   useEffect(() => {
     axios.get(config.getUser).then((data) => {
-      console.log(data.data);
+      // console.log(data.data);
       setCheckNumberOfTimes(data.data);
     });
-    check(prayerTime, arrival);
-  }, []);
+    // check(prayerTime, arrival);
+  }, [prayerTime, arrival]);
 
   const open4 = () => {
     Message.error(`Oops ${prayerTime} is fully booked choose different`);
@@ -53,38 +45,30 @@ export const Register = () => {
     }
   };
 
-  const register = async () => {
-    if (!fullName) {
-      setErrorMessage(true);
-    }
-    if (gender === false) {
-      setErrorMessage(true);
-    }
-    if (phone === "") {
-      setErrorMessage(true);
-      // alert('phone is required')
-    }
-    if (!email) {
-      setErrorMessage(true);
-    }
-
-    if (!firstTime) {
-      setErrorMessage(true);
-    }
-
-    if (!arrival) {
-      setErrorMessage(true);
-    }
-
-    if (!prayerTime) {
-      setErrorMessage(true);
-    }
-    if (checkForLength === 5) {
-      // alert("choose another time please");
-      open4();
-    } else {
-      axios
-        .post(config.register, {
+  const register = async (e) => {
+    try {
+      e.preventDefault();
+      if (!fullName) {
+        return Message.error("Please provide your full Name");
+      } else if (gender === false) {
+        return Message.error("Please indicate your gender");
+      } else if (!phone) {
+        return Message.error("please telephone number is required");
+        // alert('phone is required')
+      } else if (!email) {
+        return Message.error("Please email is required");
+      } else if (!firstTime) {
+        return Message.error(
+          "please specify if this is your first time attending"
+        );
+      } else if (!arrival) {
+        return Message.error("Please provide day of arrival");
+      } else if (!prayerTime) {
+        return Message.error("Please provide prayer time");
+      } else if (checkForLength === 5) {
+        open4();
+      } else {
+        const dataToSend = {
           fullName,
           gender,
           phone,
@@ -101,11 +85,37 @@ export const Register = () => {
           firstTime,
           arrival,
           prayerTime,
-        })
-        .then((data) => {
-          console.log("------", data);
-        })
-        .catch((error) => setErrorText(error?.response?.data?.message));
+        };
+        const response = await axios.post(config.register, dataToSend, {
+          headers: {
+            "Content-Type": "application/json;charset=UTF-8",
+            "Access-Control-Allow-Origin": "*",
+          },
+        });
+
+        if (response) {
+          setFullName("");
+          setGender(false);
+          setEmail("");
+          setZoom(false);
+          setRevOfJesus(false);
+          setFamilyAndFriends(false);
+          setOther(false);
+          setOtherSpecify("");
+          setFirstTime(false);
+          setArrival(false);
+          setPrayerTime("");
+          setPhone("");
+          Message({
+            message:
+              "Congrats, You have successfully registered for the event.",
+            type: "success",
+          });
+        }
+      }
+    } catch (error) {
+      Message.error(error?.response?.data?.message);
+      console.log(error);
     }
   };
 
@@ -118,6 +128,61 @@ export const Register = () => {
     {
       label: "--Please choose a time for prayer--",
       value: "No prayer for me",
+    },
+    {
+      value: "6:00 - 7:00pm",
+      label: "6:00 - 7:00pm",
+    },
+    {
+      value: "7:00 - 8:00pm",
+      label: "7:00 - 8:00pm",
+    },
+    {
+      value: "8:00 - 9:00pm",
+      label: "8:00 - 9:00pm",
+    },
+    {
+      value: "9:00 - 10:00pm",
+      label: "9:00 - 10:00pm",
+    },
+    {
+      value: "10:00 - 11:00pm",
+      label: "10:00 - 11:00pm",
+    },
+    {
+      value: "11:00 - 12:00am",
+      label: "11:00 - 12:00am",
+    },
+  ];
+
+  const saturdayPrayers = [
+    {
+      label: "--Please choose a time for prayer--",
+      value: "No prayer for me",
+    },
+    {
+      value: "12:00 - 1:00am",
+      label: "12:00 - 1:00am",
+    },
+    {
+      value: "1:00 - 2:00am",
+      label: "1:00 - 2:00am",
+    },
+    {
+      value: "2:00 - 3:00am",
+      label: "2:00 - 3:00am",
+    },
+    {
+      value: "3:00 - 4:00am",
+      label: "3:00 - 4:00am",
+    },
+    {
+      value: "4:00 - 5:00am",
+      label: "4:00 - 5:00am",
+    },
+    {
+      value: "5:00 - 6:00am",
+      label: "5:00 - 6:00am",
     },
     {
       value: "6:00 - 7:00am",
@@ -167,49 +232,6 @@ export const Register = () => {
       value: "5:00 - 6:00pm",
       label: "5:00 - 6:00pm",
     },
-    {
-      value: "6:00 - 7:00pm",
-      label: "6:00 - 7:00pm",
-    },
-    {
-      value: "7:00 - 8:00pm",
-      label: "7:00 - 8:00pm",
-    },
-    {
-      value: "8:00 - 9:00pm",
-      label: "8:00 - 9:00pm",
-    },
-    {
-      value: "9:00 - 10:00pm",
-      label: "9:00 - 10:00pm",
-    },
-    {
-      value: "10:00 - 11:00pm",
-      label: "10:00 - 11:00pm",
-    },
-    {
-      value: "11:00 - 12:00am",
-      label: "11:00 - 12:00am",
-    },
-  ];
-
-  const saturdayPrayers = [
-    {
-      label: "--Please choose a time for prayer--",
-      value: "No prayer for me",
-    },
-    {
-      value: "12:00 - 1:00pm",
-      label: "12:00 - 1:00am",
-    },
-    {
-      value: "1:00 - 2:00pm",
-      label: "1:00 - 2:00pm",
-    },
-    {
-      value: "2:00 - 3:00pm",
-      label: "2:00 - 3:00pm",
-    },
   ];
 
   return (
@@ -226,58 +248,10 @@ export const Register = () => {
                   </h2>
                 </header>
                 {/* Form */}
-                <form className="g-py-1">
-                  {errorMessage && (
-                    <div
-                      className="alert alert-dismissible fade show g-bg-red g-color-white rounded-0"
-                      role="alert"
-                    >
-                      <button
-                        type="button"
-                        className="close u-alert-close--light"
-                        data-dismiss="alert"
-                        aria-label="Close"
-                      >
-                        <span aria-hidden="true">×</span>
-                      </button>
-
-                      <div className="media">
-                        <span className="d-flex g-mr-10 g-mt-5">
-                          <i className="icon-ban g-font-size-25"></i>
-                        </span>
-                        <span className="media-body align-self-center">
-                          <strong>Oh snap!</strong>&nbsp;{errorText}
-                        </span>
-                      </div>
-                    </div>
-                  )}
-
-                  {success && (
-                    <div
-                      className="alert alert-dismissible fade show g-bg-teal g-color-white rounded-0"
-                      role="alert"
-                    >
-                      <button
-                        type="button"
-                        className="close u-alert-close--light"
-                        data-dismiss="alert"
-                        aria-label="Close"
-                      >
-                        <span aria-hidden="true">×</span>
-                      </button>
-
-                      <div className="media">
-                        <span className="d-flex g-mr-10 g-mt-5">
-                          <i className="icon-check g-font-size-25"></i>
-                        </span>
-                        <span className="media-body align-self-center">
-                          <strong>Well done!</strong> You've successfully
-                          registered for the event.
-                        </span>
-                      </div>
-                    </div>
-                  )}
-
+                <form
+                  className="g-py-1"
+                  onSubmit={register}
+                >
                   <div className="mb-4">
                     <label className="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
                       Full Name:
@@ -290,14 +264,6 @@ export const Register = () => {
                       onChange={(e) => setFullName(e.target.value)}
                       // style={!fullName? {border: "1px solid red"} : null}
                     />
-                    {!fullName && (
-                      <small
-                        className="form-control-feedback"
-                        style={{ color: "red" }}
-                      >
-                        This is a required field.
-                      </small>
-                    )}
                   </div>
                   <div className="g-mb-15">
                     <label className="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
@@ -333,14 +299,6 @@ export const Register = () => {
                       Female
                     </label>
                     <br />
-                    {!gender && (
-                      <small
-                        className="form-control-feedback"
-                        style={{ color: "red" }}
-                      >
-                        This is a required field.
-                      </small>
-                    )}
                   </div>
                   <div className="mb-4">
                     <label className="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
@@ -353,14 +311,6 @@ export const Register = () => {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                     />
-                    {!phone && (
-                      <small
-                        className="form-control-feedback"
-                        style={{ color: "red" }}
-                      >
-                        This is a required field.
-                      </small>
-                    )}
                   </div>
                   <div className="mb-4">
                     <label className="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
@@ -373,14 +323,6 @@ export const Register = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
-                    {!email && (
-                      <small
-                        className="form-control-feedback"
-                        style={{ color: "red" }}
-                      >
-                        This is a required field.
-                      </small>
-                    )}
                   </div>
                   <label className="h6 g-font-weight-700 g-mb-20">
                     How did you hear of A Day With Him{" "}
@@ -447,7 +389,7 @@ export const Register = () => {
                       </label>
                       <input
                         className="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
-                        type="email"
+                        type="text"
                         placeholder="Radio, TV"
                         value={otherSpecify}
                         onChange={(e) => setOtherSpecify(e.target.value)}
@@ -533,20 +475,6 @@ export const Register = () => {
                     </div>
                   </div>
 
-                  {/* <div className="mb-4">
-                    <label className="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
-                      Prayer Time you prefer
-                      <sup style={{ color: "red" }}>*</sup>
-                    </label>
-                    <input
-                      className="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
-                      type="time"
-                      placeholder="12:30 PM"
-                      value={prayerTime}
-                      onChange={(e) => setPrayerTime(e.target.value)}
-                    />
-                  </div> */}
-
                   <div className="mb-4">
                     <label className="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
                       Prayer Time you prefer
@@ -600,9 +528,10 @@ export const Register = () => {
                     <div className="col-12 align-self-center text-right">
                       <button
                         id="showToast"
-                        type="button"
+                        type="submit"
                         className="btn btn-primary btn-lg btn-block g-mr-10 g-mb-15"
-                        onClick={register}
+                        // style={{"cursor": "not-allowed"}}
+                        disabled = {!fullName && !email && !phone && !prayerTime}
                       >
                         Register
                       </button>
