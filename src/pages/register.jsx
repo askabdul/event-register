@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Message } from "element-react";
+import { Message, Loading } from "element-react";
 import axios from "axios";
 import { config } from "../config";
 
@@ -18,6 +18,7 @@ export const Register = () => {
   const [prayerTime, setPrayerTime] = useState("");
   const [checkNumberOfTimes, setCheckNumberOfTimes] = useState([]);
   const [checkForLength, setCheckForLength] = useState(null);
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     axios.get(config.getUser).then((data) => {
@@ -48,6 +49,7 @@ export const Register = () => {
   const register = async (e) => {
     try {
       e.preventDefault();
+      setLoading(true)
       if (!fullName) {
         return Message.error("Please provide your full Name");
       } else if (gender === false) {
@@ -94,6 +96,7 @@ export const Register = () => {
         });
 
         if (response) {
+          setLoading(false)
           setFullName("");
           setGender(false);
           setEmail("");
@@ -108,7 +111,7 @@ export const Register = () => {
           setPhone("");
           Message({
             message:
-              "Congrats, You have successfully registered for the event.",
+              "You've successfully registered for the event.",
             type: "success",
           });
         }
@@ -248,6 +251,7 @@ export const Register = () => {
                   </h2>
                 </header>
                 {/* Form */}
+                <Loading text="please wait..." loading={loading}>
                 <form
                   className="g-py-1"
                   onSubmit={register}
@@ -538,6 +542,7 @@ export const Register = () => {
                     </div>
                   </div>
                 </form>
+                </Loading>
               </div>
             </div>
           </div>
