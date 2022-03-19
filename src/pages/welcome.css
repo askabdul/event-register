@@ -24,6 +24,7 @@
   justify-content:flex-end;
   align-items:flex-end; */
   height: 25vh;
+
   /* width: 20vw; */
 
 }
@@ -34,7 +35,7 @@ img {
 }
 
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
     h1 {
         font-size: 2.5rem !important;
     }
@@ -42,5 +43,90 @@ img {
     p {
         font-size: 1rem;
         text-align: center;
+    }
+
+    img {
+        width: 40%;
+        height: 60%;
+    }
+
+    .custom {
+        margin-top: 9em;
+    }
+
+    .logo {
+        height: 20vh;
+    }
+}
+
+@media (min-width: 600px) {
+    h1 {
+        font-size: 7rem !important;
+    }
+
+    p {
+        font-size: 2rem !important;
+        text-align: center;
+    }
+
+    img {
+        width: 40%;
+        height: 60%;
+    }
+
+    .custom {
+        margin-top: 6em;
+    }
+
+    .btn {
+        font-size: 2.5rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    h1 {
+        font-size: 7rem !important;
+    }
+
+    p {
+        font-size: 2rem !important;
+        text-align: center;
+    }
+
+    img {
+        width: 30%;
+        height: 65%;
+    }
+
+    /* .custom {
+        margin-top: 6em;
+    } */
+
+    .btn {
+        font-size: 2.5rem;
+    }
+}
+
+@media (min-width: 1020px) {
+    h1 {
+        font-size: 7rem !important;
+    }
+
+    p {
+        font-size: 2rem !important;
+        text-align: center;
+    }
+
+    img {
+        width: 25%;
+        height: 65%;
+    }
+
+    .custom {
+        margin-top: 0em;
+    }
+
+    .btn {
+        font-size: 2.5rem;
     }
 }
