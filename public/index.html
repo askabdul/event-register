@@ -15,6 +15,16 @@
     <link rel="stylesheet" href="%PUBLIC_URL%/assets/vendor/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="%PUBLIC_URL%/assets/vendor/icon-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="%PUBLIC_URL%/assets/vendor/animate.css">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="%PUBLIC_URL%/assets/vendor/icon-line/css/simple-line-icons.css">
+    <link rel="stylesheet" href="%PUBLIC_URL%/assets/vendor/icon-hs/style.css">
+    <link rel="stylesheet" href="%PUBLIC_URL%/assets/vendor/hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" href="%PUBLIC_URL%/assets/vendor/slick-carousel/slick/slick.css">
+    <link rel="stylesheet" href="%PUBLIC_URL%/assets/vendor/fancybox/jquery.fancybox.css">
+
+    <!-- CSS Template -->
+    <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/styles.op-event.css">
   
     <!-- CSS Unify -->
     <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/unify-core.css">
@@ -23,6 +33,7 @@
   
     <!-- CSS Customization -->
     <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>React App</title>
   </head>
   <body>
@@ -35,12 +46,90 @@
   <script src="%PUBLIC_URL%/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
   <script src="%PUBLIC_URL%/assets/vendor/popper.js/popper.min.js"></script>
   <script src="%PUBLIC_URL%/assets/vendor/bootstrap/bootstrap.min.js"></script>
-
-
   <!-- JS Unify -->
   <script src="%PUBLIC_URL%/assets/js/hs.core.js"></script>
 
-  <!-- JS Customization -->
+   <!-- JS Global Compulsory -->
+   <script src="%PUBLIC_URL%/assets/vendor/jquery/jquery.min.js"></script>
+   <script src="%PUBLIC_URL%/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
+
+   <!-- JS Implementing Plugins -->
+   <script src="%PUBLIC_URL%/assets/vendor/appear.js"></script>
+   <script src="%PUBLIC_URL%/assets/vendor/masonry/dist/masonry.pkgd.min.js"></script>
+   <script src="%PUBLIC_URL%/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+   <script src="%PUBLIC_URL%/assets/vendor/jquery.countdown.min.js"></script>
+   <script src="%PUBLIC_URL%/assets/vendor/fancybox/jquery.fancybox.js"></script>
+   <script src="%PUBLIC_URL%/assets/vendor/slick-carousel/slick/slick.js"></script>
+   <script src="%PUBLIC_URL%/assets/vendor/gmaps/gmaps.min.js"></script>
+
+   <!-- JS Unify -->
+   <script src="%PUBLIC_URL%/assets/js/hs.core.js"></script>
+   <script src="%PUBLIC_URL%/assets/js/components/hs.header.js"></script>
+   <script src="%PUBLIC_URL%/assets/js/helpers/hs.hamburgers.js"></script>
+   <script src="%PUBLIC_URL%/assets/js/components/hs.scroll-nav.js"></script>
+   <script src="%PUBLIC_URL%/assets/js/components/hs.tabs.js"></script>
+   <script src="%PUBLIC_URL%/assets/js/components/gmap/hs.map.js"></script>
+   <script src="%PUBLIC_URL%/assets/js/components/hs.go-to.js"></script>
+   <script src="%PUBLIC_URL%/assets/js/components/hs.carousel.js"></script>
+
+   <!-- JS Customization -->
+   <script src="%PUBLIC_URL%/assets/js/custom.js"></script>
+
+   <!-- JS Plugins Init. -->
+   <script>
+     // initialization of google map
+     function initMap() {
+       $.HSCore.components.HSGMap.init('.js-g-map');
+     }
+
+     $(document).on('ready', function () {
+       // initialization of carousel
+       $.HSCore.components.HSCarousel.init('.js-carousel');
+
+       // initialization of header
+       $.HSCore.components.HSHeader.init($('#js-header'));
+       $.HSCore.helpers.HSHamburgers.init('.hamburger');
+
+       // initialization of tabs
+       $.HSCore.components.HSTabs.init('[role="tablist"]');
+
+       // initialization of go to section
+       $.HSCore.components.HSGoTo.init('.js-go-to');
+
+       // initialization of countdowns
+       var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
+         yearsElSelector: '.js-cd-years',
+         monthElSelector: '.js-cd-month',
+         daysElSelector: '.js-cd-days',
+         hoursElSelector: '.js-cd-hours',
+         minutesElSelector: '.js-cd-minutes',
+         secondsElSelector: '.js-cd-seconds'
+       });
+     });
+
+     $(window).on('load', function() {
+       // initialization of HSScrollNav
+       $.HSCore.components.HSScrollNav.init($('#js-scroll-nav'), {
+         duration: 700
+       });
+
+       // initialization of masonry.js
+       $('.masonry-grid').imagesLoaded().then(function () {
+         $('.masonry-grid').masonry({
+           columnWidth: '.masonry-grid-sizer',
+           itemSelector: '.masonry-grid-item',
+           percentPosition: true
+         });
+       });
+     });
+
+     $(window).on('resize', function () {
+       setTimeout(function () {
+         $.HSCore.components.HSTabs.init('[role="tablist"]');
+       }, 200);
+     });
+     </script>
+
   <script src="%PUBLIC_URL%/assets/js/custom.js"></script>
 
   </body>

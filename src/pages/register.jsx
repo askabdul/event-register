@@ -355,6 +355,7 @@ export const Register = () => {
                       />
                       <div className="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
                         <i className="fa fa-check"></i>
+                        
                       </div>
                       The Revelation of Jesus
                     </label>
