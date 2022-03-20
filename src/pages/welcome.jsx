@@ -24,8 +24,6 @@ export const Welcome = () => {
           <Link to="/register-page" className="btn btn-primary btn-lg px-4 mt-4">Register</Link>
         </div>
       </section>
-
-
     </main>
   );
 };

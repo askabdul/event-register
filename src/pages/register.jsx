@@ -401,7 +401,6 @@ export const Register = () => {
                       />
                     </div>
                   )}
-
                   <div className="row">
                     <div className="col-md-6">
                       <div className="g-mb-15">

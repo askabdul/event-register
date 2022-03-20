@@ -9,7 +9,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Welcome />}></Route>
         <Route path="/register-page" element={<Register />}></Route>
-
       </Routes>
     </Router>
   );
