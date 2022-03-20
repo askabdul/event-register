@@ -283,9 +283,10 @@ export const Register = () => {
                         checked={gender === "male"}
                         onChange={(e) => setGender(e.target.value)}
                       />
-                      <div className="u-check-icon-radio-v4 g-absolute-centered--y g-left-0 g-width-18 g-height-18">
+                      {/* <div className="u-check-icon-radio-v4 g-absolute-centered--y g-left-0 g-width-18 g-height-18">
                         <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i>
-                      </div>
+                      </div> */}
+                      &nbsp;
                       Male
                     </label>
                     <label className="form-check-inline u-check g-pl-25 ml-0 g-mr-25">
@@ -297,9 +298,10 @@ export const Register = () => {
                         checked={gender === "female"}
                         onChange={(e) => setGender(e.target.value)}
                       />
-                      <div className="u-check-icon-radio-v4 g-absolute-centered--y g-left-0 g-width-18 g-height-18">
+                      &nbsp;
+                      {/* <div className="u-check-icon-radio-v4 g-absolute-centered--y g-left-0 g-width-18 g-height-18">
                         <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i>
-                      </div>
+                      </div> */}
                       Female
                     </label>
                     <br />
@@ -341,6 +343,7 @@ export const Register = () => {
                         checked={zoom}
                         onChange={(e) => setZoom(!zoom)}
                       />
+                      &nbsp;
                       {/* <div className="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
                         <i className="fa fa-check"></i>
                       </div> */}
@@ -358,6 +361,7 @@ export const Register = () => {
                         <i className="fa fa-check"></i>
                         
                       </div> */}
+                      &nbsp;
                       The Revelation of Jesus
                     </label>
 
@@ -368,6 +372,7 @@ export const Register = () => {
                         checked={familyAndFriends}
                         onChange={(e) => setFamilyAndFriends(!familyAndFriends)}
                       />
+                      &nbsp;
                       {/* <div className="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
                         <i className="fa fa-check"></i>
                       </div> */}
@@ -382,6 +387,7 @@ export const Register = () => {
                         onChange={(e) => setOther(!other)}
                         value="other"
                       />
+                      &nbsp;
                       {/* <div className="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0 g-transition-0_2 g-transition--ease-in">
                         <i className="fa fa-check"></i>
                       </div> */}
@@ -457,9 +463,10 @@ export const Register = () => {
                             checked={arrival === "friday"}
                             onChange={(e) => setArrival(e.target.value)}
                           />
-                          <div className="u-check-icon-radio-v4 g-absolute-centered--y g-left-0 g-width-18 g-height-18">
+                          {/* <div className="u-check-icon-radio-v4 g-absolute-centered--y g-left-0 g-width-18 g-height-18">
                             <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i>
-                          </div>
+                          </div> */}
+                          &nbsp;
                           Friday
                         </label>
                         <label className="form-check-inline u-check g-pl-25 ml-0 g-mr-25">
@@ -471,9 +478,10 @@ export const Register = () => {
                             checked={arrival === "saturday"}
                             onChange={(e) => setArrival(e.target.value)}
                           />
-                          <div className="u-check-icon-radio-v4 g-absolute-centered--y g-left-0 g-width-18 g-height-18">
+                          &nbsp;
+                          {/* <div className="u-check-icon-radio-v4 g-absolute-centered--y g-left-0 g-width-18 g-height-18">
                             <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i>
-                          </div>
+                          </div> */}
                           Saturday
                         </label>
                       </div>
@@ -534,6 +542,7 @@ export const Register = () => {
                       <button
                         type="submit"
                         className="btn btn-primary btn-lg btn-block g-mr-10 g-mb-15 btn-register"
+                        style={{display: "flex", justifyContent: "center", alignItems: "center"}}
                         // style={{"cursor": "not-allowed"}}
                         disabled = {!fullName && !email && !phone && !prayerTime}
                       >
