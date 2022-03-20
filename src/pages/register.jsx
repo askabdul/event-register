@@ -18,7 +18,8 @@ export const Register = () => {
   const [prayerTime, setPrayerTime] = useState("");
   const [checkNumberOfTimes, setCheckNumberOfTimes] = useState([]);
   const [checkForLength, setCheckForLength] = useState(null);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [month] = useState(["January","February","March","April","May","June","July","August","September","October","November","December"]);
 
   useEffect(() => {
     axios.get(config.getUser).then((data) => {
@@ -237,6 +238,8 @@ export const Register = () => {
     },
   ];
 
+  
+
   return (
     <main>
       {/* Signup */}
@@ -247,7 +250,7 @@ export const Register = () => {
               <div className="u-shadow-v24 g-bg-white rounded g-py-14 g-px-30">
                 <header className="text-center mb-3">
                   <h2 className="h2 g-color-black g-font-weight-600">
-                    Register for the Event
+                    A DAY WITH HIM {month[new Date().getMonth()].toUpperCase()} {new Date().getFullYear()}: ACCRA EDITION
                   </h2>
                 </header>
                 {/* Form */}
