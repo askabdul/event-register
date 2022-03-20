@@ -242,8 +242,8 @@ export const Register = () => {
       {/* Signup */}
       <section className="g-min-height-100vh g-flex-centered g-bg-lightblue-radialgradient-circle">
         <div className="container g-py-50">
-          <div className="row justify-content-center">
-            <div className="col-sm-10 col-md-9 col-lg-6">
+          <div className="row justify-content-center vh-100 align-items-center">
+            <div className="col-sm-10 col-md-9 col-lg-6 shadow-lg p-5">
               <div className="u-shadow-v24 g-bg-white rounded g-py-14 g-px-30">
                 <header className="text-center mb-3">
                   <h2 className="h2 g-color-black g-font-weight-600">
@@ -419,7 +419,7 @@ export const Register = () => {
                             value="yes"
                           />
                           <div className="u-check-icon-radio-v4 g-absolute-centered--y g-left-0 g-width-18 g-height-18">
-                            <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i>
+                            {/* <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i> */}
                           </div>
                           Yes
                         </label>
@@ -433,7 +433,7 @@ export const Register = () => {
                             value="no"
                           />
                           <div className="u-check-icon-radio-v4 g-absolute-centered--y g-left-0 g-width-18 g-height-18">
-                            <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i>
+                            {/* <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i> */}
                           </div>
                           No
                         </label>
@@ -457,7 +457,7 @@ export const Register = () => {
                             onChange={(e) => setArrival(e.target.value)}
                           />
                           <div className="u-check-icon-radio-v4 g-absolute-centered--y g-left-0 g-width-18 g-height-18">
-                            <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i>
+                            {/* <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i> */}
                           </div>
                           Friday
                         </label>
@@ -471,7 +471,7 @@ export const Register = () => {
                             onChange={(e) => setArrival(e.target.value)}
                           />
                           <div className="u-check-icon-radio-v4 g-absolute-centered--y g-left-0 g-width-18 g-height-18">
-                            <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i>
+                            {/* <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i> */}
                           </div>
                           Saturday
                         </label>
@@ -531,7 +531,6 @@ export const Register = () => {
                   <div className="row justify-content-between">
                     <div className="col-12 align-self-center text-right">
                       <button
-                        id="showToast"
                         type="submit"
                         className="btn btn-primary btn-lg btn-block g-mr-10 g-mb-15"
                         // style={{"cursor": "not-allowed"}}
