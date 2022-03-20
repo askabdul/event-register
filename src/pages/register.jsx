@@ -394,6 +394,7 @@ export const Register = () => {
                       Other
                     </label>
                   </div>
+                  <br />
                   {other && (
                     <div className="mb-4">
                       <label className="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
@@ -408,6 +409,7 @@ export const Register = () => {
                       />
                     </div>
                   )}
+                  <br />
                   <div className="row">
                     <div className="col-md-6">
                       <div className="g-mb-15">
@@ -425,9 +427,10 @@ export const Register = () => {
                             onChange={(e) => setFirstTime(e.target.value)}
                             value="yes"
                           />
-                          <div className="u-check-icon-radio-v4 g-absolute-centered--y g-left-0 g-width-18 g-height-18">
+                          {/* <div className="u-check-icon-radio-v4 g-absolute-centered--y g-left-0 g-width-18 g-height-18">
                             <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i>
-                          </div>
+                          </div> */}
+                          &nbsp;
                           Yes
                         </label>
                         <label className="form-check-inline u-check g-pl-25 ml-0 g-mr-25">
@@ -439,9 +442,10 @@ export const Register = () => {
                             onChange={(e) => setFirstTime(e.target.value)}
                             value="no"
                           />
-                          <div className="u-check-icon-radio-v4 g-absolute-centered--y g-left-0 g-width-18 g-height-18">
+                          &nbsp;
+                          {/* <div className="u-check-icon-radio-v4 g-absolute-centered--y g-left-0 g-width-18 g-height-18">
                             <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i>
-                          </div>
+                          </div> */}
                           No
                         </label>
                       </div>
@@ -453,7 +457,7 @@ export const Register = () => {
                           When will you arrive
                           <sup style={{ color: "red" }}>*</sup>
                         </label>{" "}
-                        <br />
+                      
                         <label className="form-check-inline u-check g-pl-25 ml-0 g-mr-25">
                           <input
                             className="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
