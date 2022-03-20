@@ -304,6 +304,7 @@ export const Register = () => {
                     </label>
                     <br />
                   </div>
+                  <br />
                   <div className="mb-4">
                     <label className="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
                       Phone Number(Available on Whatsapp):
@@ -340,9 +341,9 @@ export const Register = () => {
                         checked={zoom}
                         onChange={(e) => setZoom(!zoom)}
                       />
-                      <div className="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+                      {/* <div className="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
                         <i className="fa fa-check"></i>
-                      </div>
+                      </div> */}
                       Zoom
                     </label>
 
@@ -353,10 +354,10 @@ export const Register = () => {
                         checked={revOfJesus}
                         onChange={(e) => setRevOfJesus(!revOfJesus)}
                       />
-                      <div className="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+                      {/* <div className="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
                         <i className="fa fa-check"></i>
                         
-                      </div>
+                      </div> */}
                       The Revelation of Jesus
                     </label>
 
@@ -367,9 +368,9 @@ export const Register = () => {
                         checked={familyAndFriends}
                         onChange={(e) => setFamilyAndFriends(!familyAndFriends)}
                       />
-                      <div className="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+                      {/* <div className="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
                         <i className="fa fa-check"></i>
-                      </div>
+                      </div> */}
                       Family & friends
                     </label>
 
@@ -381,9 +382,9 @@ export const Register = () => {
                         onChange={(e) => setOther(!other)}
                         value="other"
                       />
-                      <div className="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0 g-transition-0_2 g-transition--ease-in">
+                      {/* <div className="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0 g-transition-0_2 g-transition--ease-in">
                         <i className="fa fa-check"></i>
-                      </div>
+                      </div> */}
                       Other
                     </label>
                   </div>
@@ -419,7 +420,7 @@ export const Register = () => {
                             value="yes"
                           />
                           <div className="u-check-icon-radio-v4 g-absolute-centered--y g-left-0 g-width-18 g-height-18">
-                            {/* <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i> */}
+                            <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i>
                           </div>
                           Yes
                         </label>
@@ -433,7 +434,7 @@ export const Register = () => {
                             value="no"
                           />
                           <div className="u-check-icon-radio-v4 g-absolute-centered--y g-left-0 g-width-18 g-height-18">
-                            {/* <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i> */}
+                            <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i>
                           </div>
                           No
                         </label>
@@ -457,7 +458,7 @@ export const Register = () => {
                             onChange={(e) => setArrival(e.target.value)}
                           />
                           <div className="u-check-icon-radio-v4 g-absolute-centered--y g-left-0 g-width-18 g-height-18">
-                            {/* <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i> */}
+                            <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i>
                           </div>
                           Friday
                         </label>
@@ -471,7 +472,7 @@ export const Register = () => {
                             onChange={(e) => setArrival(e.target.value)}
                           />
                           <div className="u-check-icon-radio-v4 g-absolute-centered--y g-left-0 g-width-18 g-height-18">
-                            {/* <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i> */}
+                            <i className="g-absolute-centered d-block g-width-10 g-height-10 g-bg-primary--checked"></i>
                           </div>
                           Saturday
                         </label>
@@ -532,7 +533,7 @@ export const Register = () => {
                     <div className="col-12 align-self-center text-right">
                       <button
                         type="submit"
-                        className="btn btn-primary btn-lg btn-block g-mr-10 g-mb-15"
+                        className="btn btn-primary btn-lg btn-block g-mr-10 g-mb-15 btn-register"
                         // style={{"cursor": "not-allowed"}}
                         disabled = {!fullName && !email && !phone && !prayerTime}
                       >
