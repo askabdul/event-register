@@ -457,7 +457,7 @@ export const Register = () => {
                           When will you arrive
                           <sup style={{ color: "red" }}>*</sup>
                         </label>{" "}
-                      
+                          <br />
                         <label className="form-check-inline u-check g-pl-25 ml-0 g-mr-25">
                           <input
                             className="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
@@ -491,7 +491,7 @@ export const Register = () => {
                       </div>
                     </div>
                   </div>
-
+                  <br /> 
                   <div className="mb-4">
                     <label className="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
                       Prayer Time you prefer
@@ -541,12 +541,11 @@ export const Register = () => {
                       <div>Please choose the day of arrival to select time</div>
                     )}
                   </div>
-                  <div className="row justify-content-between">
-                    <div className="col-12 align-self-center text-right">
+                  <div className="row justify-content-center align-items-center">
+                    <div className="col-12 align-self-center text" style={{textAlign: "center"}}>
                       <button
                         type="submit"
                         className="btn btn-primary btn-lg btn-block g-mr-10 g-mb-15 btn-register"
-                        style={{display: "flex", justifyContent: "center", alignItems: "center"}}
                         // style={{"cursor": "not-allowed"}}
                         disabled = {!fullName && !email && !phone && !prayerTime}
                       >
