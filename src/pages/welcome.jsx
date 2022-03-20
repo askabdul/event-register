@@ -21,7 +21,7 @@ export const Welcome = () => {
           <h1 className="h1 text-white font-weight-bolder text-uppercase display-1">welcome</h1>
           <p className="lead font-weight-bold">Kindly click on the link to register</p>
 
-          <Link to="/register" className="btn btn-primary btn-lg px-4 mt-4">Register</Link>
+          <Link to="/register-page" className="btn btn-primary btn-lg px-4 mt-4">Register</Link>
         </div>
       </section>
 
