@@ -243,7 +243,7 @@ export const Register = () => {
       <section className="g-min-height-100vh g-flex-centered g-bg-lightblue-radialgradient-circle">
         <div className="container g-py-50">
           <div className="row justify-content-center vh-100 align-items-center">
-            <div className="col-sm-10 col-md-9 col-lg-6 shadow-lg p-5">
+            <div className="col-sm-10 col-md-9 col-lg-5 shadow-lg p-5">
               <div className="u-shadow-v24 g-bg-white rounded g-py-14 g-px-30">
                 <header className="text-center mb-3">
                   <h2 className="h2 g-color-black g-font-weight-600">
