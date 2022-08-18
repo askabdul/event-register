@@ -24,7 +24,7 @@ export const Register = () => {
   useEffect(() => {
     axios.get(config.getUser).then((data) => {
       // console.log(data.data);
-      setCheckNumberOfTimes(data.data);
+      setCheckNumberOfTimes(data.data.result);
     });
     // check(prayerTime, arrival);
   }, [prayerTime, arrival]);
@@ -34,6 +34,9 @@ export const Register = () => {
   };
 
   const check = (option, day) => {
+    if(checkNumberOfTimes.length === 0) {
+      setCheckForLength(null);
+    }
     if (checkNumberOfTimes.length !== 0) {
       setCheckForLength(
         checkNumberOfTimes
@@ -95,7 +98,7 @@ export const Register = () => {
             "Access-Control-Allow-Origin": "*",
           },
         });
-
+        
         if (response) {
           setLoading(false)
           setFullName("");
